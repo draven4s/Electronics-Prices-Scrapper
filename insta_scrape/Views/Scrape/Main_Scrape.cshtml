@@ -14,7 +14,7 @@
                 
                 <div class="u-list-item u-repeater-item u-list-item-1">
                     <div class="u-container-layout u-container-layout-1">
-                        <div id="myCarousel-@item.phone.Barkodas" class="carousel slide" data-ride="carousel" style="height:200px;">
+                        <div id="myCarousel-@item.phone.Barkodas" class="carousel slide" data-interval="false" style="height:200px;">
                             <!-- Indicators -->
                             <ol class="carousel-indicators">
                                 @foreach (var item1 in item.links)
@@ -42,16 +42,20 @@
                                         if (count == 0)
                                         {
                                             <div class="item active" style="height: 200px; align-self:center;">
+                                                <div class="d-flex justify-content-center" style="height: 200px; width:auto;">
                                                 <img src="@item1" alt="image" style="align-self:center; height:100%;">
+                                                </div>
                                             </div>
                                         }
                                         else
                                         {
                                             <div class="item" style="height: 200px; align-self:center;">
-                                                <img src="@item1" alt="image" style="align-self:center; height:100%;">
+                                                <div class="d-flex justify-content-center" style="height: 200px; width: auto;">
+                                                    <img src="@item1" alt="image" style="align-self:center; height:100%;">
+                                                </div>
                                             </div>
                                         }
-                                        count += 1;
+                                    count += 1;
                                     }
                                 }
                             </div>
