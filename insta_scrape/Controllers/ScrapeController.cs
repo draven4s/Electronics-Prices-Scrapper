@@ -27,7 +27,6 @@ namespace insta_scrape.Controllers
         {
             if (!string.IsNullOrEmpty(sDetails.search_term))
             {
-                //gaunam visą console outputą vienam stringe
 
                 var scrapeResult = DB.Get<Searches>(x => x.Search.Equals(sDetails.search_term));
 
@@ -42,6 +41,7 @@ namespace insta_scrape.Controllers
                 }
                 if (scrapeResult == null || (tarpas == TimeSpan.Zero || tarpas.Hours >= 2))
                 {
+                    //full pythono consolės outputas
                     string scrapeData = RunScrape(sDetails);
                     //jį sukapojam į dalis, kad gyvent lengviau būtų
                     var data = RipStringApart(scrapeData, sDetails);
@@ -66,7 +66,58 @@ namespace insta_scrape.Controllers
                 }
 
             }
-            return View("Main_Scrape");
+            return View("Main_Scrape", sDetails);
+        }
+        [HttpGet]
+        public ActionResult Main_Scrape(string search_term, string sortOrder)
+        {
+
+            List<FSpecs> specsReturn = new List<FSpecs> { };
+            Search_Details sDetails = new Search_Details { search_term = search_term};
+            if (!string.IsNullOrEmpty(search_term))
+            {
+                //gaunam visą console outputą vienam stringe
+
+                var scrapeResult = DB.Get<Searches>(x => x.Search.Equals(search_term));
+
+                UserSearches userSearch = new UserSearches { Data = DateTime.Now, SearchTerm = search_term, User = HttpContext.User.Identity.Name };
+                DB.Save(userSearch);
+
+                TimeSpan tarpas = new TimeSpan();
+
+                if (scrapeResult != null)
+                {
+                    tarpas = (DateTime.Now - scrapeResult.Data);
+                }
+                if (scrapeResult == null || (tarpas == TimeSpan.Zero || tarpas.Hours >= 2))
+                {
+
+                    string scrapeData = RunScrape(sDetails);
+                    //jį sukapojam į dalis, kad gyvent lengviau būtų
+                    var data = RipStringApart(scrapeData, sDetails);
+                    ViewBag.Specs = data;
+                }
+                else
+                {
+                    //List<FSpecs> specsReturn = new List<FSpecs> { };
+                    var searchData = DB.Get<Searches>(x => x.Search.Equals(sDetails.search_term));
+                    var data = DB.GetList<Phone>(x => x.SearchId.Equals(searchData.Id)).ToList();
+                    foreach (var ph in data)
+                    {
+                        List<string> linkai = ph.ImageLinks.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                        List<string> Linkai1 = linkai.Select(x => x.Replace("https://picfit.topocentras.lt/cdn-cgi/image/fit=contain,format=auto,height=60,width=60,quality=80/", "")).ToList();
+                        Linkai1 = Linkai1.Select(x => x.Replace("media/catalog/", "https://www.topocentras.lt/media/catalog/")).ToList();
+                        FSpecs temp = new FSpecs { };
+                        temp.links = Linkai1;
+                        temp.phone = ph;
+                        specsReturn.Add(temp);
+                    }
+                    ViewBag.Specs = specsReturn;
+                }
+                var test = specsReturn.OrderByDescending(x => x.phone.CurrentPrice).ToList();
+                ViewBag.Specs = test;
+            }
+            return View("Main_Scrape", sDetails);
         }
         private List<FSpecs> RipStringApart(string data, Search_Details sData)
         {

@@ -7,11 +7,12 @@
 
 <section class="u-section-1" id="carousel_8169">
     <div class="u-sheet u-valign-middle u-sheet-1">
+        @Html.ActionLink("Price Descending", "Main_Scrape", new { search_term = @Model.search_term.ToString(), sortOrder = "Price"})
 
         <div class=" u-list u-repeater u-list-1">
             @foreach (var item in ViewBag.Specs)
             {
-                
+
                 <div class="u-list-item u-repeater-item u-list-item-1">
                     <div class="u-container-layout u-container-layout-1">
                         <div id="myCarousel-@item.phone.Barkodas" class="carousel slide" data-interval="false" style="height:200px;">
@@ -43,7 +44,7 @@
                                         {
                                             <div class="item active" style="height: 200px; align-self:center;">
                                                 <div class="d-flex justify-content-center" style="height: 200px; width:auto;">
-                                                <img src="@item1" alt="image" style="align-self:center; height:100%;">
+                                                    <img src="@item1" alt="image" style="align-self:center; height:100%;">
                                                 </div>
                                             </div>
                                         }
@@ -55,7 +56,7 @@
                                                 </div>
                                             </div>
                                         }
-                                    count += 1;
+                                        count += 1;
                                     }
                                 }
                             </div>
@@ -125,6 +126,6 @@
                     </div>
                 </div>
             }
-            </div>
         </div>
+    </div>
 </section>
