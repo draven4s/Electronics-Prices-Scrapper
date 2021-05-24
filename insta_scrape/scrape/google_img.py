@@ -15,7 +15,7 @@ import hashlib
 import numpy as np
 
 # All in same directory
-DRIVER_PATH = 'C:/Users/ugnel/Desktop/insta-scrape/insta_scrape/scrape/chromedriver.exe'
+DRIVER_PATH = os.path.abspath(os.path.dirname(__file__) + "/chromedriver.exe")
 
 def fetch_image_urls(query:str, max_links_to_fetch:int, wd:webdriver, sleep_between_interactions:int=1):
     #sys.stdout = codecs.getwriter("iso-8859-1")
