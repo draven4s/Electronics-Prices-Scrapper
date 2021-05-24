@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<br />
+<br />
+<!--Prisijungimo forma-->
+<div class="d-flex justify-content-center align-items-center login-container">
+    <!--Prisijungimo formos pradžia -->
+    <div class="col-sm-6 d-flex justify-content-center align-items-center">
+        @Html.ActionLink("Login", "Login", "Home", new { @class = "btn mt-5 rounded-pill btn-lg btn-custom1 btn-block text-uppercase" })
+    </div>
+    <div class="col-sm-6 d-flex justify-content-center align-items-center">
+        @Html.ActionLink("Register", "Register", "Home", new { @class = "btn mt-5 rounded-pill btn-lg btn-custom1 btn-block text-uppercase" })
+    </div>
+</div>

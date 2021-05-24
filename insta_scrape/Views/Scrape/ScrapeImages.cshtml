@@ -1,0 +1,11 @@
+﻿@using insta_scrape.Classes
+@using insta_scrape.Models
+@model Links
+<div class="row">
+    @foreach (var item in Model.Link)
+    {
+        <div class="col-sm-3">
+            <img src="@item" alt="Profile Image" width="200" height="200">
+        </div>
+    }
+</div>

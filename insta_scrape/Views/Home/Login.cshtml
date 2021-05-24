@@ -1,0 +1,57 @@
+﻿@using insta_scrape.Classes
+@model Logins
+@{
+    ViewBag.Title = "Loginas";
+
+}
+<br />
+<br />
+<br />
+<br />
+<!--Prisijungimo forma-->
+@if (!string.IsNullOrEmpty(ViewBag.Success))
+{
+    @Html.Partial("Success", (string)ViewBag.Success)
+}
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    @Html.Partial("Error", (string)ViewBag.Error)
+}
+
+<div class="d-flex justify-content-center align-items-center login-container">
+    <!--Prisijungimo formos pradžia -->
+    @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "form-signin text-center" }))
+    {
+        <h1 class="mb-5 font-weight-light text-uppercase d-flex justify-content-center align-items-center">Login</h1>
+        <br />
+        <!--Vartotojo vardo laukas -->
+        <!--Jeigu laukas paliktas tuščias prisijungti neleidžiama ir liepiama įvesti vartotojo vardą -->
+        <div class="form-group">
+            @Html.TextBoxFor(x => x.username, new { @type = "text", @id = "Login", @class = "form-control rounded-pill form-control-lg", @placeholder = "Username", @required = "", @autofocus = "" })
+            <!--Klaida jeigu vartotojo vardas netinkamas -->
+            <span class="help-block"></span>
+        </div>
+
+        <!--Slaptažodžio laukas -->
+        <!--Jeigu laukas paliktas tuščias prisijungti neleidžiama ir liepiama įvesti slaptažodį -->
+        <div class="form-group">
+            @Html.TextBoxFor(x => x.password, new { @type = "password", @id = "inputPassword", @class = "form-control rounded-pill form-control-lg", @placeholder = "Password", @required = "" })
+            <!--Klaida jeigu slaptažodis netinkamas -->
+            <span class="help-block"></span>
+        </div>
+
+
+        <!--<div class="forgot-link form-group d-flex justify-content-between align-items-center">-->
+        <!--Prisiminti slaptažodį funkcija-->
+        <!--<div class="form-check">
+            <input type="checkbox" class="form-check-input" id="remember">
+            <label class="form-check-label" for="remember">Prisiminti slaptažodį</label>
+        </div>-->
+        <!--Pamiršto slaptažodžio atstatymas-->
+        <!--<a href="atstatymas.php">Pamiršote slaptažodį?</a>-->
+        <!--</div>-->
+        <br />
+        <button type="submit" id="btn" value="Login" class="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase">Login</button>
+        <p class="mt-3 font-weight-normal">Neturite paskyros? @Html.ActionLink("Register", "Register", "Home")</p>
+    }
+</div>

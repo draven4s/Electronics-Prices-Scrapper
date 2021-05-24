@@ -1,0 +1,9 @@
+﻿
+@model Links 
+<p>Stuff everywhere</p>
+    @foreach (var item in links)
+    {
+        <img src="@item.Image" alt="Profile Image" width="200" height="200">
+    }
+
+@Html.ActionLink("Log the fuck out", "Logout", "Home")

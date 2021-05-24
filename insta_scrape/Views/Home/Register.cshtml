@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@using insta_scrape.Classes
+@model Register
+<br />
+<br />
+<br />
+<br />
+@if (!string.IsNullOrEmpty(ViewBag.Success))
+{
+    @Html.Partial("Success", (string)ViewBag.Success)
+}
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    @Html.Partial("Error", (string)ViewBag.Error)
+}
+
+<!--Register form-->
+<div class="d-flex justify-content-center align-items-center login-container">
+    <!--Registracijos formos pradžia -->
+    <form method="post">
+        <h1 class="mb-5 font-weight-light text-uppercase d-flex justify-content-center align-items-center">Register</h1>
+        <br />
+        <!--Email laukelis-->
+        <div class="form-group">
+            <input type="text" name="email" class="form-control rounded-pill form-control-lg" placeholder="E-mail">
+            <!--Klaida jeigu email formatas netinkamas -->
+            <span class="help-block"></span>
+        </div>
+        <!--Vartotojo vardo laukas -->
+        <!--Jeigu laukas paliktas tuščias prisijungti neleidžiama ir liepiama įvesti vartotojo vardą -->
+        <div class="form-group">
+            <input type="text" name="username" class="form-control rounded-pill form-control-lg" placeholder="Username">
+            <!--Klaida jeigu vartotojo vardas netinkamas -->
+            <span class="help-block"></span>
+        </div>
+
+        <!--Elektroninio pašto laukas -->
+        <!--Jeigu laukas paliktas tuščias prisijungti neleidžiama ir liepiama įvesti slaptažodį -->
+        <!--<div class="form-group">
+        <input type="text" class="form-control rounded-pill form-control-lg" placeholder="Elektroninis paštas">
+    </div>-->
+        <!--Slaptažodžio laukas -->
+        <!--Jeigu laukas paliktas tuščias prisijungti neleidžiama ir liepiama įvesti slaptažodį -->
+        <div class="form-group">
+            <input type="password" name="password" class="form-control rounded-pill form-control-lg" placeholder="Password">
+            <!--Klaida jeigu slaptažodis netinkamas -->
+            <span class="help-block"></span>
+        </div>
+
+        <!--Slaptažodžio patvirtinimo laukas -->
+        <!--Jeigu laukas paliktas tuščias prisijungti neleidžiama ir liepiama įvesti slaptažodį -->
+        <div class="form-group">
+            <input type="password" name="confirm_password" class="form-control rounded-pill form-control-lg" placeholder="Repeat Password">
+            <!--Klaida jeigu slaptažodis nesutampa -->
+
+        </div>
+        <br />
+        <button type="submit" class="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase" value="Submit">Register</button>
+        <p class="mt-3 font-weight-normal">Already registered? @Html.ActionLink("Login", "Login", "Home")</p>
+    </form>
+</div>
+

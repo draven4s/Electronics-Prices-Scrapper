@@ -1,0 +1,126 @@
+﻿@using insta_scrape.Classes
+@using insta_scrape.Models
+@model Search_Details
+@{
+    ViewBag.Title = "Scrape";
+}
+
+<section class="u-section-1" id="carousel_8169">
+    <div class="u-sheet u-valign-middle u-sheet-1">
+
+        <div class=" u-list u-repeater u-list-1">
+            @foreach (var item in ViewBag.Specs)
+            {
+                
+                <div class="u-list-item u-repeater-item u-list-item-1">
+                    <div class="u-container-layout u-container-layout-1">
+                        <div id="myCarousel-@item.phone.Barkodas" class="carousel slide" data-ride="carousel" style="height:200px;">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                @foreach (var item1 in item.links)
+                                {
+                                    int counter = 0;
+                                    if (counter == 0)
+                                    {
+                                        <li data-target="#myCarousel-@item.phone.Barkodas" data-slide-to="@counter" class="active"></li>
+
+                                    }
+                                    else
+                                    {
+                                        <li data-target="#myCarousel-@item.phone.Barkodas" data-slide-to="@counter"></li>
+                                    }
+                                    counter += 1;
+
+                                }
+
+                            </ol>
+                            <div class="carousel-inner" style="height: 200px; align-content:center;">
+                                @{
+                                    int count = 0;
+                                    foreach (var item1 in item.links)
+                                    {
+                                        if (count == 0)
+                                        {
+                                            <div class="item active" style="height: 200px; align-self:center;">
+                                                <img src="@item1" alt="image" style="align-self:center; height:100%;">
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="item" style="height: 200px; align-self:center;">
+                                                <img src="@item1" alt="image" style="align-self:center; height:100%;">
+                                            </div>
+                                        }
+                                        count += 1;
+                                    }
+                                }
+                            </div>
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel-@item.phone.Barkodas" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel-@item.phone.Barkodas" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+
+                        </div>
+
+                        <h5 class="u-text u-text-1">Iphone 12 (64GB)</h5>
+                        @if (@item.phone.OldPrice > 0)
+                        {
+                            <strike>@item.phone.OldPrice EUR</strike>
+                        }
+                        @item.phone.CurrentPrice EUR
+                        <br />
+                        <div class="u-text u-text-2 overflow">
+                            Aprašymas:<br />
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-sm-5">Gamintojas: </div><div class="col-sm-6">@item.phone.Gamintojas</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-5">Garantija: </div><div class="col-sm-6">@item.phone.Garantija</div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-sm-5">Svoris(gramais): </div><div class="col-sm-6">@item.phone.Svoris</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-5">Korpuso medžiagos: </div><div class="col-sm-6">@item.phone.KorpusoMedziagos</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-5">Ekrano raiška: </div><div class="col-sm-6">@item.phone.EkranoRaiska</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-5">Ekrano įstrižainė: </div><div class="col-sm-6">@item.phone.EkranoIstrizaine</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-5">Galinė kamera: </div><div class="col-sm-6">@item.phone.GalineKamera</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-5">Priekinė kamera: </div><div class="col-sm-6">@item.phone.PriekineKamera</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-5">Vidinė atmintis: </div><div class="col-sm-6">@item.phone.VidAtmintis</div>
+                                </div>
+                                <br />
+
+                            </div>
+
+                            <h6 class="u-text u-text-custom-color-1 u-text-3"> </h6>
+
+                        </div>
+                        <br />
+                        <a href="@item.phone.LinkToItem" class="btn btn-primary btn-lg" tabindex="-1" role="button">Buy it!</a>
+
+
+                    </div>
+                </div>
+            }
+            </div>
+        </div>
+</section>

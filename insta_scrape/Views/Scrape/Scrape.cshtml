@@ -1,0 +1,21 @@
+﻿@using insta_scrape.Classes
+@using insta_scrape.Models
+@model Search_Details
+<br />
+
+<br />
+<br />
+<br />
+<div class="d-flex justify-content-center align-items-center login-container">
+    @using (Html.BeginForm("Main_Scrape", "Scrape", FormMethod.Post, new { @class = "" }))
+    {
+        <div>
+            @Html.TextBoxFor(x => x.search_term, new { @type = "text", @id = "search_data", @class = "form-control rounded-pill form-control-lg", @placeholder = "Search", @required = "", @autofocus = "" })
+        </div>
+        <br />
+        <div>
+            <button type="submit" id="btn" value="Login" class="btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase">Scrape</button>
+        </div>
+    }
+
+</div>
