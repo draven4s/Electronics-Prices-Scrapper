@@ -7,7 +7,14 @@
 
 <section class="u-section-1" id="carousel_8169">
     <div class="u-sheet u-valign-middle u-sheet-1">
-        @Html.ActionLink("Price Descending", "Main_Scrape", new { search_term = @Model.search_term.ToString(), sortOrder = "Price"})
+        <div class="dropdown">
+            <button class="dropbtn rounded-pill">Rikiavimas</button>
+            <div class="dropdown-content">
+                @Html.ActionLink("Kaina mažėjanti", "Main_Scrape", new { search_term = @Model.search_term.ToString(), sortOrder = "Price" })
+                
+            </div>
+        </div>
+   
 
         <div class=" u-list u-repeater u-list-1">
             @foreach (var item in ViewBag.Specs)
