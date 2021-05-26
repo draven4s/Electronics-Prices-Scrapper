@@ -119,8 +119,16 @@ namespace insta_scrape.Controllers
                     }
                     ViewBag.Specs = specsReturn;
                 }
-                var test = specsReturn.OrderByDescending(x => x.phone.CurrentPrice).ToList();
-                ViewBag.Specs = test;
+                if (sortOrder.Contains("Descending"))
+                {
+                    var test = specsReturn.OrderByDescending(x => x.phone.CurrentPrice).ToList();
+                    ViewBag.Specs = test;
+                }
+                else if(sortOrder.Contains("Ascending"))
+                {
+                    var test = specsReturn.OrderBy(x => x.phone.CurrentPrice).ToList();
+                    ViewBag.Specs = test;
+                }
             }
             return View("Main_Scrape", sDetails);
         }
