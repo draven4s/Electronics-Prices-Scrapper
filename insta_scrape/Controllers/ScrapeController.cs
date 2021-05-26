@@ -14,15 +14,19 @@ namespace insta_scrape.Controllers
     public class ScrapeController : Controller
     {
         private DBController DB = new DBController();
+        [Authorize]
         public ActionResult Scrape()
         {
             return View();
         }
+        [Authorize]
         public ActionResult Main_Scrape()
         {
+            ViewBag.Title = "Scraped data";
             return View();
         }
         [HttpPost]
+        [Authorize]
         public ActionResult Main_Scrape(Search_Details sDetails)
         {
             if (!string.IsNullOrEmpty(sDetails.search_term))
@@ -69,6 +73,7 @@ namespace insta_scrape.Controllers
             return View("Main_Scrape", sDetails);
         }
         [HttpGet]
+        [Authorize]
         public ActionResult Main_Scrape(string search_term, string sortOrder)
         {
 
@@ -180,7 +185,7 @@ namespace insta_scrape.Controllers
             }
             return (specsReturn);
         }
-
+        [Authorize]
         private Phone ConvToClass(List<string> specs)
         {
             Phone phone = new Phone { };
@@ -266,17 +271,17 @@ namespace insta_scrape.Controllers
             }
             return phone;
         }
-
+        [Authorize]
         void proc_DataReceived(object sender, DataReceivedEventArgs e)
         {
             var ss = e.Data;
         }
-
+        [Authorize]
         public string RunScrape(Search_Details sDetails)
         {
                 //ProcessStartInfo start = new ProcessStartInfo();
                 string cmd = HttpRuntime.AppDomainAppPath + "scrape\\google_img.py";
-                string args = " \"" + sDetails.search_term + "\" 10";
+                string args = " \"" + sDetails.search_term + "\" 4";
 
                 // Argumentus suklijuojam
                 string combArg = string.Format("{0}{1}", cmd, args);

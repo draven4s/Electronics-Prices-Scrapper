@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using insta_scrape.Classes;
+using insta_scrape.Authentication;
 
 namespace insta_scrape.Controllers
 {
@@ -33,8 +34,26 @@ namespace insta_scrape.Controllers
         public ActionResult User_Profile()
         {
             ViewBag.Message = "User Profile";
+            var userSearches = DB.GetList<UserSearches>(x => x.User.Equals(HttpContext.User.Identity.Name)).ToList();
+            ViewBag.MyLinks = userSearches;
             return View();
         }
+        [Authorize]
+        [HttpPost]
+        public ActionResult User_Profile(string new_password, string confirm_password)
+        {
+            ViewBag.Message = "User Profile";
+            var userSearches = DB.GetList<UserSearches>(x => x.User.Equals(HttpContext.User.Identity.Name)).ToList();
+            ViewBag.MyLinks = userSearches;
+            if(new_password == confirm_password)
+            {
+                var user = DB.Get<Logins>(x => x.username.Equals(HttpContext.User.Identity.Name));
+                user.password = PasswordHelper.GetHash(new_password);
+                DB.Update(user);
+            }
+            return View();
+        }
+
 
         public ActionResult Login()
         {
@@ -56,7 +75,7 @@ namespace insta_scrape.Controllers
                         ViewBag.Error = "User blocked";
                         return View();
                     }
-                    if (user.password.Equals(model.password))
+                    if (user.password.Equals(PasswordHelper.GetHash(model.password)))
                     {
                         FormsAuthentication.RedirectFromLoginPage(model.username, true);
                     }
@@ -97,7 +116,7 @@ namespace insta_scrape.Controllers
                 {
                     if (model.password == model.confirm_password)
                     {
-                        var login = new Logins { username = model.username, password = model.password };
+                        var login = new Logins { username = model.username, password = PasswordHelper.GetHash(model.password) };
                         DB.Save(login);
                         ViewBag.Success = "Registration succesful!";
                         return View("Login");

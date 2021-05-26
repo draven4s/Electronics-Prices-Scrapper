@@ -246,6 +246,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="hasherOfPasswords\PasswordHelper.cs" />
+    <Compile Include="Models\ProfileLinks.cs" />
     <Compile Include="Models\SearchDetails.cs" />
     <Compile Include="Models\Links.cs" />
     <Compile Include="Models\UserViewModel.cs" />

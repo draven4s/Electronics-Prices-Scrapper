@@ -1,7 +1,9 @@
 ﻿@{
     ViewBag.Title = "Profile";
 }
+@using insta_scrape.Models
 @Scripts.Render("~/bundles/SCRAPE")
+@model ProfileLinks
 <br />
 <h2>@ViewBag.Message</h2>
 <br />
@@ -11,31 +13,34 @@
     <div id="Scrape_history" class="tabcontent">
         <br />
         <h3>This is your scrape history</h3>
-        <p>something you searched</p>
-        <p>something you searched</p>
-        <p>something you searched</p>
-        <p>something you searched</p>
+        @foreach (var x in ViewBag.MyLinks)
+        {
+            <div class="row">
+                <div class="col-sm-5">@x.SearchTerm</div><div class="col-sm-6">@x.Data</div>
+            </div>
+        }
+
     </div>
     <div id="Change_password" class="tabcontent">
-            <!-- Slaptažodžio keitimo forma -->
-            <form method="post" class="login-form text-center">
-                <h3 class="mb-5 font-weight-light text-uppercase">Slaptažodžio keitimas</h3>
+        <!-- Slaptažodžio keitimo forma -->
+        <form method="post" class="login-form text-center">
+            <h3 class="mb-5 font-weight-light text-uppercase">Slaptažodžio keitimas</h3>
 
-                <div class="form-group">
-                    <input type="password" name="new_password" class="form-control rounded-pill form-control-lg" placeholder="Naujas slaptažodis">
-                    <!--Klaida jeigu vartotojo vardas netinkamas -->
-                    <span class="help-block"></span>
-                </div>
-                <div class="form-group">
-                    <input type="password" name="confirm_password" class="form-control rounded-pill form-control-lg" placeholder="Patvirtinkite slaptažodį">
-                    <!--Klaida jeigu slaptažodis netinkamas -->
-                    <span class="help-block"></span>
-                </div>
-                <!-- Keitimo patvirtinimas -->
-                <div class="form-group">
-                    <input type="submit" class="form-control btn mt-5 rounded-pill btn-lg btn-custom1 btn-block text-uppercase" value="Change password">
-                </div>
-            </form>
+            <div class="form-group">
+                <input type="password" name="new_password" class="form-control rounded-pill form-control-lg" placeholder="Naujas slaptažodis">
+                <!--Klaida jeigu slaptažodis netinkamas -->
+                <span class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <input type="password" name="confirm_password" class="form-control rounded-pill form-control-lg" placeholder="Patvirtinkite slaptažodį">
+                <!--Klaida jeigu slaptažodis netinkamas -->
+                <span class="help-block"></span>
+            </div>
+            <!-- Keitimo patvirtinimas -->
+            <div class="form-group">
+                <input type="submit" class="form-control btn mt-5 rounded-pill btn-lg btn-custom1 btn-block text-uppercase" value="Change password">
+            </div>
+        </form>
     </div>
 </div>
 <br />
@@ -46,7 +51,7 @@
         @Html.ActionLink("Logout", "Logout", "Home", new { @class = "btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase" })
     </div>
     <div class="col-sm-4">
-    @Html.ActionLink("To the scraping", "Scrape", "Scrape", null, new { @class = "btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase" })
+        @Html.ActionLink("To the scraping", "Scrape", "Scrape", null, new { @class = "btn mt-5 rounded-pill btn-lg btn-custom btn-block text-uppercase" })
     </div>
     <div class="col-sm-2"></div>
 </div>
