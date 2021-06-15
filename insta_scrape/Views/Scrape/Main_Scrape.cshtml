@@ -10,8 +10,8 @@
         <div class="dropdown">
             <button class="dropbtn rounded-pill">Rikiavimas</button>
             <div class="dropdown-content">
-                @Html.ActionLink("Kaina mažėjanti", "Main_Scrape", new { search_term = @Model.search_term.ToString(), sortOrder = "Descending" })
-                @Html.ActionLink("Kaina didėjanti", "Main_Scrape", new { search_term = @Model.search_term.ToString(), sortOrder = "Ascending" })
+                @Html.ActionLink("Kaina mažėjanti", "Main_Scrape", new { search_term = @Model.search_term.ToString(), sortOrder = "Descending", store = Model.search_store.ToString() })
+                @Html.ActionLink("Kaina didėjanti", "Main_Scrape", new { search_term = @Model.search_term.ToString(), sortOrder = "Ascending", store = Model.search_store.ToString() })
             </div>
         </div>
    

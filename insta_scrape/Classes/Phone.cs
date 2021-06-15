@@ -10,9 +10,10 @@ namespace insta_scrape.Classes
     {
         public int Id { get; set; }
         public int SearchId { get; set; }
+        public string Store { get; set; }
         public string LinkToItem { get; set; }
         public string ImageLinks { get; set; }
-        public long PrekesKodas { get; set; }
+        public string PrekesKodas { get; set; }
         public long Barkodas { get; set; }
         public string GamintojoKodas { get; set; }
         public int Garantija { get; set; }
@@ -36,5 +37,6 @@ namespace insta_scrape.Classes
         public string OS { get; set; }
         public string Branduoliai { get; set; }
         public string TaktinisDaznis { get; set; }
+
     }
 }

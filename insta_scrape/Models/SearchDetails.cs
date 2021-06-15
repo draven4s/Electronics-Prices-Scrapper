@@ -19,5 +19,14 @@ namespace insta_scrape.Models
         }
         public string search_term { get; set; }
         public int search_amount { get; set; }
+        public Stores search_store { get; set; }
+        public string selected_store { get; set; }
+
+
+    }
+    public enum Stores
+    {
+        Avitela,
+        Topocentras
     }
 }

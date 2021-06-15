@@ -10,6 +10,7 @@ namespace insta_scrape.Classes
     {
         public int Id { get; set; }
         public string Search { get; set; }
+        public string Store { get; set; }
         public DateTime Data { get; set; }
     }
 }
