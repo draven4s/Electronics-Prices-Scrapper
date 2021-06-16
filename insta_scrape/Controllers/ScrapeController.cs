@@ -37,7 +37,8 @@ namespace insta_scrape.Controllers
                 if(actualResult.FirstOrDefault<Searches>(x => x.Store.Contains(stras.ToString())) != null){
                     scrapeResult = actualResult.First<Searches>(x => x.Store.Contains(stras.ToString()));
                 }
-
+                
+                //vartotoju paieskos kaupiamos DB pagal vartotojo vardą, laiką, paieškos kriterijų
                 UserSearches userSearch = new UserSearches { Data = DateTime.Now, SearchTerm = sDetails.search_term, User = HttpContext.User.Identity.Name };
                 DB.Save(userSearch);
 
@@ -156,6 +157,8 @@ namespace insta_scrape.Controllers
             }
             return View("Main_Scrape", sDetails);
         }
+
+        //visa paimta informacija iš div'o suskaldoma į mažesnius pagal tam tikras klases TOPOCENTRO
         private List<FSpecs> RipStringApart(string data, Search_Details sData)
         {
             List<string> skirtTelefonai = data.Split(new string[] { "EndOfQuery" }, StringSplitOptions.None).ToList();
@@ -218,6 +221,8 @@ namespace insta_scrape.Controllers
             }
             return (specsReturn);
         }
+
+        //visa paimta informacija iš div'o suskaldoma į mažesnius pagal tam tikras klases AVITELA
         private List<FSpecs> RipStringApartAvitela(string data, Search_Details sData)
         {
             List<string> skirtTelefonai = data.Split(new string[] { "EndOfQuery" }, StringSplitOptions.None).ToList();
@@ -281,6 +286,8 @@ namespace insta_scrape.Controllers
             return (specsReturn);
         }
         [Authorize]
+
+
         private Phone ConvToClass(List<string> specs)
         {
             Phone phone = new Phone { };
@@ -458,6 +465,8 @@ namespace insta_scrape.Controllers
             var ss = e.Data;
         }
         [Authorize]
+
+        //Python kodas paleidžiamas (pradedamas scrape'inimas
         public string RunScrape(Search_Details sDetails)
         {
                 //ProcessStartInfo start = new ProcessStartInfo();
